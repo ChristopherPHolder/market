@@ -13,8 +13,6 @@ permissions:
 jobs:
   main:
     runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.43.0-jammy
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,6 +28,7 @@ jobs:
           node-version: 20
           cache: 'npm'
       - run: npm ci
+      - run: npx playwright install --with-deps
       - uses: nrwl/nx-set-shas@v4
 
       - run: git branch --track main origin/main
